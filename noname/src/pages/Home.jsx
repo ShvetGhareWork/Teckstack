@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import Hero from "../components/Hero";
 import Aos from "aos";
+import Services from "../components/Services";
+import Tech from "../components/Tech";
 
 export default function Home() {
   Aos.init({ duration: 700 });
@@ -32,7 +34,7 @@ export default function Home() {
           <Hero />
 
           {/* Trusted By Section */}
-          <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+          <section className="w-full mt-10 py-12 md:py-24 lg:py-32 bg-muted">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <div className="space-y-6">
@@ -54,9 +56,9 @@ export default function Home() {
               </div>
               <div
                 data-aos="fade-up"
-                className="mx-auto grid max-w-7xl grid-cols-2 gap-10 md:grid-cols-4 lg:gap-12 py-8"
+                className="mx-auto grid max-w-7xl grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10 lg:gap-12 py-8"
               >
-                {Array.from({ length: 4 }).map((_, i) => (
+                {images.map((image, i) => (
                   <div
                     key={i}
                     data-aos="fade-up"
@@ -64,121 +66,21 @@ export default function Home() {
                     className="flex items-center justify-center"
                   >
                     <img
-                      src={images[i]}
+                      src={image}
                       width={120}
-                      height={60}
+                      height={160}
                       alt={`Client logo ${i + 1}`}
-                      className="h-[480px] w-[400px] object-contain"
+                      className="h-auto w-3/4 sm:w-2/4 md:w-1/3 lg:w-1/4 object-contain"
                     />
                   </div>
                 ))}
               </div>
             </div>
           </section>
-
           {/* Services Section */}
-          <section id="services" className="w-full py-12 md:py-24 lg:py-32">
-            <div className="container px-4 md:px-6">
-              <div className="flex flex-col items-center justify-center space-y-4 text-center">
-                <div className="space-y-2">
-                  <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
-                    Our Services
-                  </h2>
-                  <p className="max-w-[900px] text-muted-foreground md:text-xl">
-                    We offer a comprehensive range of development services to
-                    bring your vision to life.
-                  </p>
-                </div>
-              </div>
-              <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-12 py-8">
-                <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm">
-                  <Globe className="h-12 w-12 text-primary" />
-                  <h3 className="text-xl font-bold">Web Development</h3>
-                  <p className="text-center text-muted-foreground">
-                    Modern, responsive websites and web applications using
-                    React, Next.js, and Django.
-                  </p>
-                </div>
-                <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm">
-                  <Smartphone className="h-12 w-12 text-primary" />
-                  <h3 className="text-xl font-bold">Mobile Development</h3>
-                  <p className="text-center text-muted-foreground">
-                    Cross-platform mobile applications using React Native and
-                    Flutter.
-                  </p>
-                </div>
-                <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm">
-                  <Layers className="h-12 w-12 text-primary" />
-                  <h3 className="text-xl font-bold">UI/UX Design</h3>
-                  <p className="text-center text-muted-foreground">
-                    User-centered design that enhances user experience and
-                    drives engagement.
-                  </p>
-                </div>
-                <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm">
-                  <Database className="h-12 w-12 text-primary" />
-                  <h3 className="text-xl font-bold">Backend Development</h3>
-                  <p className="text-center text-muted-foreground">
-                    Robust backend systems using Django, Node.js, and other
-                    modern frameworks.
-                  </p>
-                </div>
-                <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm">
-                  <Code className="h-12 w-12 text-primary" />
-                  <h3 className="text-xl font-bold">Custom Software</h3>
-                  <p className="text-center text-muted-foreground">
-                    Tailored software solutions designed to meet your specific
-                    business needs.
-                  </p>
-                </div>
-                <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm">
-                  <CheckCircle className="h-12 w-12 text-primary" />
-                  <h3 className="text-xl font-bold">Quality Assurance</h3>
-                  <p className="text-center text-muted-foreground">
-                    Comprehensive testing to ensure your application is bug-free
-                    and performs optimally.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
+          <Services />
           {/* Technologies Section */}
-          <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
-            <div className="container px-4 md:px-6">
-              <div className="flex flex-col items-center justify-center space-y-4 text-center">
-                <div className="space-y-2">
-                  <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
-                    Our Tech Stack
-                  </h2>
-                  <p className="max-w-[900px] text-muted-foreground md:text-xl">
-                    We use the latest technologies to build fast, scalable, and
-                    maintainable applications.
-                  </p>
-                </div>
-              </div>
-              <div className="mx-auto grid max-w-5xl grid-cols-2 gap-8 md:grid-cols-4 lg:gap-12 py-8">
-                {[
-                  "React",
-                  "Next.js",
-                  "Django",
-                  "React Native",
-                  "Flutter",
-                  "Node.js",
-                  "TypeScript",
-                  "Python",
-                ].map((tech, i) => (
-                  <div key={i} className="flex flex-col items-center space-y-2">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-background shadow-sm">
-                      <Code className="h-10 w-10 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-bold">{tech}</h3>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
+          <Tech />
           {/* Process Section */}
           <section id="process" className="w-full py-12 md:py-24 lg:py-32">
             <div className="container px-4 md:px-6">
@@ -319,7 +221,7 @@ export default function Home() {
                 ))}
               </div>
               <div className="flex justify-center mt-8">
-                <button asChild>
+                <button>
                   <NavLink href="#contact">
                     Start Your Project <ArrowRight className="ml-2 h-4 w-4" />
                   </NavLink>

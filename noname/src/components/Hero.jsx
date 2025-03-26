@@ -10,7 +10,7 @@ const Hero = () => {
   }, []);
   return (
     <div>
-      <section className="w-full  py-12 mt-4 flex items-center justify-center md:py-24 lg:py-32 xl:py-48">
+      <section className="w-full  py-12 mt-14 flex items-center justify-center md:py-24 lg:py-32 xl:py-48">
         <div className="container px-4 md:px-6">
           <div className="grid gap-8 items-center lg:grid-cols-2 lg:gap-16">
             {/* Image Section */}
@@ -51,7 +51,7 @@ const Hero = () => {
 
                 <p
                   className="max-w-[600px] mx-auto lg:mx-0 pb-4 text-muted-foreground md:text-lg"
-                  data-aos="fade-in"
+                  data-aos="zoom-in"
                   data-aos-delay={1500}
                 >
                   We craft exceptional web and mobile applications using
