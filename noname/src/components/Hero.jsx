@@ -10,9 +10,19 @@ const Hero = () => {
   }, []);
   return (
     <div>
-      <section className="w-full mt-2 py-12 flex items-center justify-center md:py-24 lg:py-32 xl:py-48">
+      <section className="w-full  py-12 mt-4 flex items-center justify-center md:py-24 lg:py-32 xl:py-48">
         <div className="container px-4 md:px-6">
           <div className="grid gap-8 items-center lg:grid-cols-2 lg:gap-16">
+            {/* Image Section */}
+            <div className="flex justify-center lg:order-last">
+              <img
+                src="/Hero.png?height=650&width=650"
+                alt="Hero img"
+                className="w-full max-w-[400px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[750px] aspect-video rounded-xl object-cover"
+                data-aos="fade-up"
+                // data-aos-delay={500}
+              />
+            </div>
             {/* Text Section */}
             <div className="flex flex-col justify-center space-y-4 text-center lg:text-left">
               <div className="space-y-2">
@@ -52,22 +62,12 @@ const Hero = () => {
               {/* Buttons */}
               <div
                 className="flex flex-col gap-4 min-[400px]:flex-row justify-center lg:justify-start"
-                data-aos="fade-up"
+                data-aos="fade-right"
                 data-aos-delay={2000}
               >
-                <ButtonNormal Text="Start Your Project" />
-                <ButtonNormal Text="View Our Work" />
+                <ButtonNormal data_aos_delay={2200} Text="Start Your Project" />
+                <ButtonNormal data_aos_delay={2400} Text="View Our Work" />
               </div>
-            </div>
-            {/* Image Section */}
-            <div className="flex justify-center lg:order-last">
-              <img
-                src="/Hero.png?height=650&width=650"
-                alt="Hero img"
-                className="w-full max-w-[400px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[750px] aspect-video rounded-xl object-cover"
-                data-aos="fade-left"
-                data-aos-delay={2500}
-              />
             </div>
           </div>
         </div>
