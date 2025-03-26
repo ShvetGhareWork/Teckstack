@@ -4,7 +4,7 @@ import "../App.css";
 export default function Button({ Text }) {
   return (
     <>
-      <button className="flex justify-center  items-center px-5 py-5 gap-2 h-9 w-48 border-none bg-black rounded-2xl cursor-pointer hover:bg-gray-800 duration-700">
+      <button className="flex justify-center items-center px-5 py-5 gap-2 h-9 w-48 border-none bg-black rounded-2xl cursor-pointer hover:bg-gray-800 duration-700">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"

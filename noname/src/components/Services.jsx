@@ -85,9 +85,9 @@ const Services = () => {
               {services.map((service, i) => (
                 <div
                   key={i}
-                  data-aos="flip-up"
+                  data-aos="zoom-in"
                   data-aos-delay={150 * i}
-                  className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm transition-transform transform hover:scale-105 hover:shadow-md duration-300 ease-out hover:bg-black hover:text-white"
+                  className="flex flex-col items-center space-y-2 cursor-pointer rounded-lg border p-6 shadow-sm transition-all transform hover:scale-105 hover:shadow-md duration-300 ease-out hover:bg-black hover:text-white"
                 >
                   {service.icon}
                   <h3 className="text-xl font-bold">{service.title}</h3>
