@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { SquareCheckBig } from "lucide-react";
 import Aos from "aos";
 import "aos/dist/aos.css";
+
 const plans = [
   {
     name: "Basic",
@@ -168,11 +169,11 @@ const ServicesPage = () => {
   return (
     <div className="p-6 w-full flex flex-col items-center">
       {/* Tab Navigation */}
-      <div className="flex space-x-6 border-b pb-2 mb-6">
+      <div className="flex space-x-6 border-b pb-2 mb-6 overflow-x-auto">
         {["services", "pricing", "workflow"].map((tab) => (
           <button
             key={tab}
-            className={`px-4 py-2 ${
+            className={`px-4 py-2 whitespace-nowrap ${
               activeTab === tab
                 ? "border-b-2 border-black font-bold"
                 : "text-gray-500"
@@ -187,7 +188,7 @@ const ServicesPage = () => {
       {/* Tab Content */}
       <div className="w-full max-w-6xl">
         {activeTab === "services" && (
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {services.map((service, i) => (
               <div
                 data-aos="fade-up"
@@ -220,7 +221,7 @@ const ServicesPage = () => {
       </div>
 
       {activeTab === "pricing" && (
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {plans.map((plan, index) => (
             <div
               data-aos="fade-up"
@@ -256,7 +257,7 @@ const ServicesPage = () => {
       )}
 
       {activeTab === "workflow" && (
-        <div className="p-8 w-[1100px] border rounded-lg">
+        <div className="p-4 sm:p-8 w-full sm:w-[1100px] border rounded-lg">
           <h2 className="text-2xl mb-7 font-bold">Daily Workflow</h2>
           {workflowData.map((day, index) => (
             <div
