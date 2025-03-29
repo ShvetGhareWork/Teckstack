@@ -1,18 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import { NavLink } from "react-router-dom";
-import {
-  Globe,
-  Smartphone,
-  Layers,
-  Database,
-  Code,
-  CheckCircle,
-  ArrowRight,
-  Mail,
-  Phone,
-  MapPin,
-} from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import Hero from "../components/Hero";
 import Aos from "aos";
 import Services from "../components/Services";
@@ -40,28 +28,26 @@ export default function Home() {
     <>
       <Navbar />
       <div className="flex min-h-screen items-center justify-center flex-col">
-        {/* Header */}
-
         <main className="flex-1">
           {/* Hero Section */}
           <Hero />
 
           {/* Trusted By Section */}
-          <section className="w-full mt-10 py-12 md:py-24 lg:py-32 bg-muted">
-            <div className="container px-4 md:px-6">
+          <section className="w-full mt-10 py-8 sm:py-12 md:py-24 lg:py-32 bg-muted">
+            <div className="container px-4 sm:px-6">
               {/* Heading Section */}
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <div className="space-y-6">
                   <h2
                     data-aos="fade-up"
-                    className="text-3xl font-bold tracking-tighter md:text-4xl"
+                    className="text-2xl sm:text-3xl font-bold tracking-tighter md:text-4xl"
                   >
                     Trusted By Industry Leaders
                   </h2>
                   <p
                     data-aos="fade-up"
                     data-aos-delay="200"
-                    className="max-w-[1100px] text-muted-foreground md:text-3xl"
+                    className="max-w-[1100px] text-muted-foreground text-sm sm:text-base md:text-lg"
                   >
                     We've helped businesses of all sizes achieve their digital
                     transformation goals.
@@ -78,13 +64,13 @@ export default function Home() {
                   <div
                     key={i}
                     data-aos="fade-up"
-                    data-aos-delay={150 * i}
+                    data-aos-delay={100 * i}
                     className="flex items-center justify-center transition-transform duration-300 ease-in-out transform hover:scale-110"
                   >
                     <img
                       src={image}
                       alt={`Client logo ${i + 1}`}
-                      className="w-[90px] sm:w-[100px] md:w-[120px] lg:w-[140px] xl:w-[160px] h-auto object-contain opacity-80 transition-opacity hover:opacity-100"
+                      className="w-[70px] sm:w-[90px] md:w-[120px] lg:w-[140px] xl:w-[160px] h-auto object-contain opacity-80 transition-opacity hover:opacity-100"
                     />
                   </div>
                 ))}
@@ -94,14 +80,19 @@ export default function Home() {
 
           {/* Services Section */}
           <Services />
+
           {/* Technologies Section */}
           <Tech />
+
           {/* Process Section */}
-          <section id="process" className="w-full py-12 md:py-24 lg:py-32">
-            <div className="container px-4 md:px-6">
+          <section
+            id="process"
+            className="w-full py-8 sm:py-12 md:py-24 lg:py-32"
+          >
+            <div className="container px-4 sm:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <div className="space-y-2">
-                  <h1 className="text-3xl font-bold tracking-tighter md:text-4xl xl:text-5xl">
+                  <h1 className="text-2xl sm:text-3xl font-bold tracking-tighter md:text-4xl xl:text-5xl">
                     {"Our Development Process".split("").map((char, index) => (
                       <span
                         key={index}
@@ -115,7 +106,7 @@ export default function Home() {
                   <p
                     data-aos="zoom-in"
                     data-aos-delay={500}
-                    className="max-w-[900px] text-muted-foreground md:text-xl"
+                    className="max-w-[900px] text-muted-foreground text-sm sm:text-base md:text-lg"
                   >
                     We follow a structured approach to ensure your project is
                     delivered on time and exceeds expectations.
@@ -134,22 +125,23 @@ export default function Home() {
 
           {/* Stats Section */}
           <Stats />
+
           {/* FAQ Section */}
           <FAQs />
 
           {/* CTA Section */}
           <section
             id="contact"
-            className="w-full py-12 md:py-24 lg:py-32 bg-primary text-primary-foreground"
+            className="w-full py-8 sm:py-12 md:py-24 lg:py-32 bg-white rounded-lg border-2 text-black shadow-md"
           >
-            <div className="container px-4 bg md:px-6">
+            <div className="container px-4 sm:px-6">
               <div className="grid gap-8 md:grid-cols-2">
                 <div className="flex flex-col justify-center space-y-4">
                   <div className="space-y-2">
-                    <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
+                    <h2 className="text-2xl sm:text-3xl font-bold tracking-tighter md:text-4xl">
                       Ready to Start Your Project?
                     </h2>
-                    <p className="text-primary-foreground/80 md:text-xl">
+                    <p className="text-gray-500 text-sm sm:text-base md:text-lg">
                       Let's discuss how we can help you achieve your business
                       goals with a custom software solution.
                     </p>
@@ -171,7 +163,7 @@ export default function Home() {
                 </div>
                 <div className="rounded-lg bg-background p-6 shadow-lg">
                   <form className="space-y-4">
-                    <div className="grid gap-4 md:grid-cols-2">
+                    <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
                       <div className="space-y-2">
                         <label
                           htmlFor="name"
@@ -181,7 +173,7 @@ export default function Home() {
                         </label>
                         <input
                           id="name"
-                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                           placeholder="John Doe"
                         />
                       </div>
@@ -195,7 +187,7 @@ export default function Home() {
                         <input
                           id="email"
                           type="email"
-                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                           placeholder="john@example.com"
                         />
                       </div>
@@ -209,7 +201,7 @@ export default function Home() {
                       </label>
                       <input
                         id="company"
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         placeholder="Acme Inc."
                       />
                     </div>
@@ -226,7 +218,7 @@ export default function Home() {
                         placeholder="Tell us about your project..."
                       />
                     </div>
-                    <button type="submit" className="w-full">
+                    <button type="submit" className="w-full py-3">
                       Send Message
                     </button>
                   </form>

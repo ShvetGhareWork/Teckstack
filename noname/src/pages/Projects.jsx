@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import FeaturedCaseStudy from "../components/FeaturedCaseStudy";
 
 export default function Teams() {
   useEffect(() => {
@@ -195,7 +196,7 @@ export default function Teams() {
           </div>
         </section>
       </main>
-
+      <FeaturedCaseStudy />
       <Footer />
     </>
   );

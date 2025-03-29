@@ -28,12 +28,12 @@ const Navbar = () => {
             "Information",
             "Projects",
             "Blogs",
-            "About us",
+            "About Us",
             "Contact",
           ].map((item) => (
             <NavLink
               key={item}
-              to={`/${item.toLowerCase()}`}
+              to={`/${item.toLowerCase().replace(" ", "-")}`} // Replace spaces with hyphens
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
               {item}
@@ -60,12 +60,12 @@ const Navbar = () => {
               "Information",
               "Projects",
               "Blogs",
-              "About us",
+              "About Us",
               "Contact",
             ].map((item) => (
               <NavLink
                 key={item}
-                to={`/${item.toLowerCase()}`}
+                to={`/${item.toLowerCase().replace(" ", "-")}`} // Replace spaces with hyphens
                 className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
                 onClick={() => setIsOpen(false)}
               >
