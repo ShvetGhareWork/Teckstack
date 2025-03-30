@@ -9,6 +9,10 @@ import Blogs from "./pages/Blogs";
 import Aboutus from "./pages/Aboutus";
 import Contact from "./pages/Contact";
 import CreateTeamPage from "./pages/CreateTeamPage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+import UserDetailsForm from "./pages/UserDetailsForm";
 
 const App = () => {
   return (
@@ -23,6 +27,10 @@ const App = () => {
         <Route path="/about-us" element={<Aboutus />} /> {/* Updated path */}
         <Route path="/contact" element={<Contact />} /> {/* Updated path */}
         <Route path="/create-team" element={<CreateTeamPage />} />{" "}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/user-details" element={<UserDetailsForm />} />
         {/* Updated path */}
       </Routes>
     </>
