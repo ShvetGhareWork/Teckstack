@@ -10,9 +10,9 @@ import Aboutus from "./pages/Aboutus";
 import Contact from "./pages/Contact";
 import CreateTeamPage from "./pages/CreateTeamPage";
 import Login from "./pages/Login";
-import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import UserDetailsForm from "./pages/UserDetailsForm";
+import EditProfile from "./components/EditProfile";
 
 const App = () => {
   return (
@@ -28,9 +28,9 @@ const App = () => {
         <Route path="/contact" element={<Contact />} /> {/* Updated path */}
         <Route path="/create-team" element={<CreateTeamPage />} />{" "}
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/user-details" element={<UserDetailsForm />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
         {/* Updated path */}
       </Routes>
     </>
