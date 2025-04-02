@@ -55,7 +55,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userData = { name, email, password, skills, bio, location, phone };
+      const userData = { email, password }; // Add other fields if needed
       const endpoint = isLogin ? "/api/user/login" : "/api/user/register";
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}${endpoint}`,
@@ -64,13 +64,15 @@ const Login = () => {
       );
 
       if (response.data.success) {
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.data.token); // Save token
+        localStorage.setItem("user", JSON.stringify(response.data.user)); // Save user data
         alert(`${isLogin ? "Login" : "Registration"} successful!`);
         navigate(isLogin ? "/" : "/profile");
       } else {
         alert(response.data.message);
       }
     } catch (error) {
+      console.error("Error during login:", error);
       alert("An error occurred. Please try again.");
     }
   };

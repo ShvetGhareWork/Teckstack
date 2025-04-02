@@ -13,6 +13,8 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import UserDetailsForm from "./pages/UserDetailsForm";
 import EditProfile from "./components/EditProfile";
+import AddBlog from "./pages/AddBlog";
+import BlogDetails from "./pages/BlogDetails";
 
 const App = () => {
   return (
@@ -31,6 +33,8 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/user-details" element={<UserDetailsForm />} />
         <Route path="/edit-profile" element={<EditProfile />} />
+        <Route path="/add-blog" element={<AddBlog />} />
+        <Route path="/blogs/:id" element={<BlogDetails />} />
         {/* Updated path */}
       </Routes>
     </>

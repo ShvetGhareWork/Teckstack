@@ -1,17 +1,39 @@
-// import img from "next/img";
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import TeamDetails from "../components/TeamDetails";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Teams() {
-  // Sample team data
+  const [teams, setTeams] = useState([]); // State to store teams
+  const [error, setError] = useState(null); // State to handle errors
+  const navigate = useNavigate(); // For navigation
+
   useEffect(() => {
     Aos.init({ duration: 700 });
+
+    // Fetch teams from the backend
+    const fetchTeams = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/teams/list-team`
+        );
+        if (response.data.success) {
+          setTeams(response.data.teams); // Set the fetched teams
+        } else {
+          setError("Failed to fetch teams.");
+        }
+      } catch (err) {
+        console.error("Error fetching teams:", err);
+        setError("An error occurred while fetching teams.");
+      }
+    };
+
+    fetchTeams();
   }, []);
+
   return (
     <>
       <Navbar />
@@ -42,83 +64,84 @@ export default function Teams() {
         </section>
 
         {/* Teams Section */}
-        <TeamDetails />
-
-        {/* Team Spotlight Section */}
-        <section className="mt-16 bg-gray-50 py-12">
-          <div className="container mx-auto px-4 md:px-6 text-center">
-            <h2 className="text-xl font-bold tracking-tighter md:text-3xl xl:text-4xl flex justify-center">
-              {"Team Spotlight".split("").map((char, index) => (
-                <span
-                  key={index}
-                  data-aos="fade-in"
-                  data-aos-delay={index * 50}
+        <section className="container mx-auto px-4 md:px-6 py-12">
+          {error ? (
+            <p className="text-center text-red-500">{error}</p>
+          ) : teams.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {teams.map((team) => (
+                <div
+                  key={team._id}
+                  className="border rounded-lg shadow-md p-4 bg-white flex flex-col"
                 >
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
-            </h2>
-            <p
-              data-aos="zoom-in"
-              data-aos-delay={500}
-              className="max-w-[1100px] mx-auto text-center text-gray-500 text-muted-foreground md:text-xl mt-4"
-            >
-              Get to know some of our exceptional team members who make our
-              company great.{" "}
-            </p>
-          </div>
+                  {/* Dummy Image */}
+                  <div className="h-40 w-full rounded-lg overflow-hidden border mb-4">
+                    <img
+                      src={`https://via.placeholder.com/300?text=${team.teamName}`}
+                      alt={team.teamName}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
 
-          <div className="container bg-cover mx-auto px-4 md:px-6 grid gap-8 md:grid-cols-3 mt-10">
-            {[
-              {
-                id: 1,
-                name: "Alex Johnson",
-                role: "Lead Developer",
-                description:
-                  "With over 10 years of experience in web development, Alex leads our development team with expertise in React, Node.js, and cloud architecture.",
-                img: "/image3.jpg",
-              },
-              {
-                id: 2,
-                name: "Sophia Chen",
-                role: "UX Design Lead",
-                description:
-                  "Sophia brings creativity and user-centered thinking to every project. Her background in psychology helps her create intuitive and engaging user experiences.",
-                img: "/image3.jpg",
-              },
-              {
-                id: 3,
-                name: "Marcus Williams",
-                role: "DevOps Engineer",
-                description:
-                  "Marcus ensures our infrastructure runs smoothly and securely. His expertise in CI/CD pipelines and cloud services keeps our deployments reliable and efficient.",
-                img: "/image3.jpg",
-              },
-            ].map((member) => (
-              <div
-                key={member.name}
-                className="flex flex-col items-center text-center"
-                data-aos="zoom-in"
-                data-aos-delay={member.id * 150}
-              >
-                <div className="h-40 w-40 rounded-full overflow-hidden border">
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    width={160}
-                    height={160}
-                    className="object-cover"
-                  />
+                  {/* Team Details */}
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold mb-2">{team.teamName}</h3>
+                    <p className="text-gray-600 mb-2">
+                      <strong>Leader:</strong> {team.teamLeader}
+                    </p>
+                    <p className="text-gray-600 mb-2">
+                      <strong>Team Size:</strong> {team.teamMembers.length}{" "}
+                      members
+                    </p>
+                    <div className="text-gray-600 mb-4">
+                      <strong>Skills:</strong>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {Array.isArray(team.skills) &&
+                        team.skills.length > 0 ? (
+                          team.skills.map((skill, index) => (
+                            <span
+                              key={index}
+                              className="bg-gray-200 text-gray-700 text-xs font-medium px-2 py-1 rounded-full"
+                            >
+                              {skill}
+                            </span>
+                          ))
+                        ) : (
+                          <span className="text-gray-500">
+                            No skills listed
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Enquire Button */}
+                  <div className="flex justify-end">
+                    <button
+                      onClick={() => alert(`Enquire about ${team.teamName}`)}
+                      className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800"
+                    >
+                      📩 Enquire
+                    </button>
+                  </div>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold">{member.name}</h3>
-                <p className="text-sm text-gray-600">{member.role}</p>
-                <p className="mt-2 text-sm text-gray-600">
-                  {member.description}
-                </p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-gray-500">No teams available.</p>
+          )}
         </section>
+
+        {/* Create New Team Button */}
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => navigate("/create-team")}
+            className="px-6 py-3 mb-4 mt-4 bg-black text-white rounded-md hover:bg-gray-800 transition duration-300 ease-in-out"
+            data-aos="fade-up"
+          >
+            📩 Create New Team
+          </button>
+        </div>
       </main>
       <Footer />
     </>

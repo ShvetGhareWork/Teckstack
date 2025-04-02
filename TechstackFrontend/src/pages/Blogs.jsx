@@ -1,43 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import FeaturedArticle from "../components/FeatureedArticle";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import NewsletterAndTopics from "../components/NewsletterAndTopics";
-
-const blogs = [
-  {
-    title: "The Future of E-commerce: Trends to Watch in 2025",
-    description:
-      "Discover the latest trends shaping the e-commerce industry and how businesses can adapt to stay ahead in 2025.",
-    image: "/blog1.jpg",
-    link: "/blogs/future-of-ecommerce",
-  },
-  {
-    title: "How AI is Revolutionizing Customer Experience",
-    description:
-      "Learn how artificial intelligence is transforming the way businesses interact with customers and deliver personalized experiences.",
-    image: "/blog2.jpg",
-    link: "/blogs/ai-customer-experience",
-  },
-  {
-    title: "Top 5 Web Development Frameworks in 2025",
-    description:
-      "Explore the most popular web development frameworks and their use cases to build modern, scalable applications.",
-    image: "/blog3.jpg",
-    link: "/blogs/top-web-frameworks",
-  },
-  {
-    title: "The Importance of Cybersecurity in the Digital Age",
-    description:
-      "Understand why cybersecurity is critical for businesses and how to protect sensitive data from cyber threats.",
-    image: "/blog4.jpg",
-    link: "/blogs/cybersecurity-importance",
-  },
-];
+import axios from "axios";
 
 const Blogs = () => {
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/blogs/list`
+        );
+        if (response.data.success) {
+          setBlogs(response.data.blogs);
+        }
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
   useEffect(() => {
     // Initialize AOS
     AOS.init({ duration: 1000, once: true });
@@ -68,31 +57,32 @@ const Blogs = () => {
 
       <FeaturedArticle />
 
-      <div className="grid p-8   mt-5 mb-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {blogs.map((blog, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-            data-aos="fade-up"
-            data-aos-delay={index * 150}
-          >
-            <img
-              src={blog.image}
-              alt={blog.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-6">
-              <h3 className="text-xl font-bold mb-2">{blog.title}</h3>
-              <p className="text-gray-600 mb-4">{blog.description}</p>
-              <a
-                href={blog.link}
-                className="inline-block bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition"
-              >
-                Read More
-              </a>
+      <div className="container mx-auto px-4 py-12">
+        <h1 className="text-3xl font-bold mb-6">Our Blogs</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {blogs.map((blog) => (
+            <div
+              key={blog._id}
+              className="bg-white rounded-lg shadow-md overflow-hidden"
+            >
+              <img
+                src={blog.image || "https://via.placeholder.com/300"}
+                alt={blog.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h2 className="text-xl font-bold">{blog.title}</h2>
+                <p className="text-gray-600">{blog.summary}</p>
+                <a
+                  href={`/blogs/${blog._id}`}
+                  className="text-blue-600 hover:underline mt-2 block"
+                >
+                  Read More
+                </a>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <NewsletterAndTopics />

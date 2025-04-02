@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 const cors = require("cors"); // Import CORS middleware
 const connectDB = require("./config/mongodb");
 const userRouter = require("./routes/UserRoute");
+const teamRouter = require("./routes/TeamRoute");
+const blogRouter = require("./routes/BlogRoute");
 
 dotenv.config(); // Load environment variables
 
@@ -18,6 +20,8 @@ app.use(express.json());
 
 // Routes
 app.use("/api/user", userRouter);
+app.use("/api/teams", teamRouter);
+app.use("/api/blogs", blogRouter);
 
 // Basic route
 app.get("/", (req, res) => {
