@@ -43,6 +43,29 @@ const Profile = () => {
     navigate("/login");
   };
 
+  const handleDelete = async (blogId) => {
+    try {
+      const response = await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/blog/${blogId}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
+      if (response.data.success) {
+        // After deletion, update the state by filtering out the deleted blog
+        setBlogs((prevBlogs) =>
+          prevBlogs.filter((blog) => blog._id !== blogId)
+        );
+        alert("Blog deleted successfully.");
+      } else {
+        alert("Failed to delete the blog.");
+      }
+    } catch (error) {
+      console.error("Error deleting blog:", error);
+      alert("An error occurred while deleting the blog.");
+    }
+  };
+
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -167,6 +190,12 @@ const Profile = () => {
                         className="text-white bg-gray-800 rounded-lg px-3 py-2 mt-4 block"
                       >
                         Read More
+                      </button>
+                      <button
+                        onClick={() => handleDelete(blog._id)}
+                        className="text-white bg-red-500 rounded-lg px-3 py-2 mt-4 block"
+                      >
+                        Delete Blog
                       </button>
                     </div>
                   </div>

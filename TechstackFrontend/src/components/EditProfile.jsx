@@ -62,8 +62,10 @@ const EditProfile = () => {
         }
       );
       if (response.data.success) {
+        // Update the state with the new data to reflect changes without navigating
+        setFormData(response.data.user);
         alert("Profile updated successfully!");
-        navigate("/profile");
+        navigate("/profile"); // Redirect to profile page after successful update
       } else {
         alert(response.data.message);
       }

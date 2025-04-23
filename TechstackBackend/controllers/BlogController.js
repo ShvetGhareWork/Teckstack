@@ -1,5 +1,6 @@
 const BlogModel = require("../models/BlogModel");
 
+// Create Blog
 const createBlog = async (req, res) => {
   try {
     const { title, summary, content, author } = req.body;
@@ -20,6 +21,7 @@ const createBlog = async (req, res) => {
   }
 };
 
+// Get Blogs
 const getBlogs = async (req, res) => {
   try {
     const blogs = await BlogModel.find().sort({ createdAt: -1 });
@@ -30,4 +32,27 @@ const getBlogs = async (req, res) => {
   }
 };
 
-module.exports = { createBlog, getBlogs };
+// Delete Blog
+const deleteBlog = async (req, res) => {
+  try {
+    const { blogId } = req.params;
+
+    // Find and delete the blog by its ID
+    const deletedBlog = await BlogModel.findByIdAndDelete(blogId);
+
+    if (!deletedBlog) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Blog not found." });
+    }
+
+    res
+      .status(200)
+      .json({ success: true, message: "Blog deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting blog:", error);
+    res.status(500).json({ success: false, message: "Internal server error." });
+  }
+};
+
+module.exports = { createBlog, getBlogs, deleteBlog };

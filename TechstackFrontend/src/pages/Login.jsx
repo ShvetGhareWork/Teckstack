@@ -55,24 +55,36 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userData = { email, password }; // Add other fields if needed
+      const userData = isLogin
+        ? { name, email, password }
+        : { name, email, password, skills, bio, location, phone };
+
       const endpoint = isLogin ? "/api/user/login" : "/api/user/register";
+      const token = localStorage.getItem("token");
+      console.log(userData, token);
+      // console.log(`${import.meta.env.VITE_BACKEND_URL}${endpoint}`);
+
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}${endpoint}`,
         userData,
-        { headers: { "Content-Type": "application/json" } }
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       if (response.data.success) {
-        localStorage.setItem("token", response.data.token); // Save token
-        localStorage.setItem("user", JSON.stringify(response.data.user)); // Save user data
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         alert(`${isLogin ? "Login" : "Registration"} successful!`);
-        navigate(isLogin ? "/" : "/profile");
+        navigate("/");
       } else {
         alert(response.data.message);
       }
     } catch (error) {
-      console.error("Error during login:", error);
+      console.error("Error during login/registration:", error);
       alert("An error occurred. Please try again.");
     }
   };
@@ -80,17 +92,20 @@ const Login = () => {
   return (
     <>
       <Navbar />
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg p-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">
+      <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4 py-10">
+        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-xl p-8">
+          <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
             {isLogin ? "Login" : "Sign Up"}
           </h2>
 
-          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
             {!isLogin && (
               <>
-                <div className="col-span-1">
-                  <label>Name</label>
+                <div>
+                  <label className="block mb-1">Name</label>
                   <input
                     type="text"
                     value={name}
@@ -99,8 +114,8 @@ const Login = () => {
                     required
                   />
                 </div>
-                <div className="col-span-1">
-                  <label>Skills</label>
+                <div>
+                  <label className="block mb-1">Skills</label>
                   <Select
                     isMulti
                     options={skillOptions}
@@ -108,8 +123,8 @@ const Login = () => {
                     className="w-full"
                   />
                 </div>
-                <div className="col-span-1">
-                  <label>Location</label>
+                <div>
+                  <label className="block mb-1">Location</label>
                   <input
                     type="text"
                     value={location}
@@ -117,8 +132,8 @@ const Login = () => {
                     className="w-full p-2 border rounded-lg"
                   />
                 </div>
-                <div className="col-span-1">
-                  <label>Phone</label>
+                <div>
+                  <label className="block mb-1">Phone</label>
                   <input
                     type="text"
                     value={phone}
@@ -127,8 +142,8 @@ const Login = () => {
                     pattern="\d{10}"
                   />
                 </div>
-                <div className="col-span-2">
-                  <label>Bio</label>
+                <div className="md:col-span-2">
+                  <label className="block mb-1">Bio</label>
                   <textarea
                     value={bio}
                     onChange={(e) => setBio(e.target.value)}
@@ -137,8 +152,22 @@ const Login = () => {
                 </div>
               </>
             )}
-            <div className="col-span-1">
-              <label>Email</label>
+
+            {isLogin && (
+              <div className="md:col-span-2">
+                <label className="block mb-1">Name</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full p-2 border rounded-lg"
+                  required
+                />
+              </div>
+            )}
+
+            <div>
+              <label className="block mb-1">Email</label>
               <input
                 type="email"
                 value={email}
@@ -147,8 +176,8 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="col-span-1">
-              <label>Password</label>
+            <div>
+              <label className="block mb-1">Password</label>
               <input
                 type="password"
                 value={password}
@@ -157,7 +186,7 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="col-span-2">
+            <div className="md:col-span-2">
               <button
                 type="submit"
                 className="w-full p-3 bg-black text-white rounded-lg hover:bg-gray-900"
@@ -166,19 +195,20 @@ const Login = () => {
               </button>
             </div>
           </form>
+
           <button
             onClick={() => setIsLogin(!isLogin)}
-            className="mt-4 text-end w-full text-black hover:text-gray-600 transition-all duration-300"
+            className="mt-6 block text-center w-full text-gray-700 hover:text-black"
           >
             {isLogin ? (
               <>
                 Don't have an account?{" "}
-                <span className="hover:underline">Sign Up here</span>
+                <span className="underline">Sign Up here</span>
               </>
             ) : (
               <>
                 Already have an account?{" "}
-                <span className="hover:underline">Login here</span>
+                <span className="underline">Login here</span>
               </>
             )}
           </button>

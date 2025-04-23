@@ -1,6 +1,7 @@
 const express = require("express");
 const Blog = require("../models/BlogModel");
 const router = express.Router();
+const { deleteBlog } = require("../controllers/BlogController");
 
 // Create a new blog
 router.post("/create", async (req, res) => {
@@ -43,5 +44,7 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ success: false, message: "Internal server error." });
   }
 });
+
+router.delete("/blog/:id", deleteBlog);
 
 module.exports = router;
